@@ -1,127 +1,74 @@
-# Using Blockle Blocks with Next.js
+# Blockle Blocks setup
 
-This guide documents the setup used in the Retro project for `@blockle/blocks`
-with Next.js App Router and Vanilla Extract.
+How `@blockle/blocks` is wired into this project: Next.js App Router,
+Vanilla Extract, and the Momotaro theme.
 
-For component selection and usage examples, see the
-[Blockle Blocks component guide](./components/README.md).
+For component selection and usage, see the
+[component guide](./components/README.md).
 
-## Requirements
+## Packages
 
-- Node.js `20.19.0+`, `22.12.9+`, or `24.2.0+`
-- React and React DOM `19.1.0+`
-- Next.js 16 for the Turbopack configuration shown below
+Installed in [package.json](../package.json):
 
-Retro uses `@blockle/blocks`. Its package also declares peer dependencies on
-`@blockle/blocks-core`,
+- `@blockle/blocks`: the component library.
+- `@blockle/blocks-theme-momotaro`: the theme passed to `BlocksProvider`.
+- `@vanilla-extract/css`: for writing `.css.ts` styles with `vars` tokens.
+- `@vanilla-extract/next-plugin` (dev): compiles `.css.ts` files in Next.js.
+- `@vanilla-extract/vite-plugin` (dev): compiles `.css.ts` files in Vitest.
+
+Blocks also declares peer dependencies on `@blockle/blocks-core`,
 `@blockle/blocks-react`, `@blockle/blocks-react-slot`, and
-`@blockle/blocks-reset`. The package manager should resolve these when
-installing the package; check its output for peer dependency warnings.
+`@blockle/blocks-reset`; the package manager resolves them.
 
-## 1. Install the packages
+## Next.js configuration
 
-Install the Blocks library, the theme used by Retro, and Vanilla Extract:
-
-```bash
-npm install @blockle/blocks @blockle/blocks-theme-momotaro @vanilla-extract/css
-npm install --save-dev @vanilla-extract/next-plugin
-```
-
-Retro's package manifest used these versions:
-
-| Package | Version range |
-| --- | --- |
-| `@blockle/blocks` | `^2.3.25` |
-| `@blockle/blocks-theme-momotaro` | `^6.2.6` |
-| `@vanilla-extract/css` | `^1.21.2` |
-| `@vanilla-extract/next-plugin` | `^2.5.2` |
-
-## 2. Configure the Vanilla Extract Next.js plugin
-
-Wrap the existing Next.js config with `createVanillaExtractPlugin`. Keep any
-other existing Next.js options in `nextConfig`:
+[next.config.ts](../next.config.ts) wraps the Next.js config with
+`createVanillaExtractPlugin`, using the Turbopack integration:
 
 ```ts
 import { createVanillaExtractPlugin } from "@vanilla-extract/next-plugin";
 import type { NextConfig } from "next";
 
+const nextConfig: NextConfig = {
+  // existing Next.js options
+};
+
 const withVanillaExtract = createVanillaExtractPlugin({
   unstable_turbopack: { mode: "auto" },
 });
 
-const nextConfig: NextConfig = {
-  // Keep your existing Next.js options here.
-};
-
 export default withVanillaExtract(nextConfig);
 ```
 
-The `mode: "auto"` option enables the plugin's Turbopack integration for
-Next.js 16, matching the Retro setup.
+## Reset and theme provider
 
-## 3. Import the reset and provide a theme
-
-In the root App Router layout, import the Blocks reset and wrap the application
-with `BlocksProvider` using the theme:
+The root layout, [src/app/layout.tsx](../src/app/layout.tsx), imports the
+Blocks reset and wraps the app in `BlocksProvider`:
 
 ```tsx
 import "@blockle/blocks/reset";
 
 import { BlocksProvider } from "@blockle/blocks";
 import { momotaro } from "@blockle/blocks-theme-momotaro";
-import type { ReactNode } from "react";
 
-export default function RootLayout({
-  children,
-}: Readonly<{ children: ReactNode }>) {
-  return (
-    <html lang="en">
-      <body>
-        <BlocksProvider theme={momotaro}>{children}</BlocksProvider>
-      </body>
-    </html>
-  );
-}
+<BlocksProvider theme={momotaro}>{children}</BlocksProvider>;
 ```
 
-Keep the layout as a Server Component unless it needs client-only behavior; the
-Retro project provides the theme from its root layout without adding a
-`"use client"` directive there.
+The layout stays a Server Component. Components that use React state, browser
+APIs, or interaction need `"use client"`; see the component guide.
 
-## 4. Use Blocks components
+## Tests
 
-Import components from `@blockle/blocks` and use them in your pages or
-components:
+Vitest compiles `.css.ts` files through `@vanilla-extract/vite-plugin`
+(see [vitest.config.mts](../vitest.config.mts)). Render components inside the
+theme with `renderWithTheme` from
+[src/test/render.tsx](../src/test/render.tsx), which wraps the UI in
+`BlocksProvider`.
 
-```tsx
-import { Box, Heading } from "@blockle/blocks";
-
-export function Card({ title }: { title: string }) {
-  return (
-    <Box
-      borderRadius={2}
-      padding={2}
-      backgroundColor="white"
-      boxShadow={1}
-    >
-      <Heading level={3}>{title}</Heading>
-    </Box>
-  );
-}
-```
-
-Components that use React hooks, browser APIs, or client-side interaction must
-be Client Components and start with `"use client"`. Static components can
-remain Server Components.
-
-## 5. Verify the setup
-
-Run the project's production build and type check. For example:
+## Verify
 
 ```bash
-npm run build
-npm run ts
+npm run check
 ```
 
-If the project does not define a `ts` script, use its configured TypeScript
-check command instead.
+This runs Biome, the TypeScript check, and the tests.

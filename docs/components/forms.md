@@ -81,6 +81,9 @@ and ensure every interactive control has an accessible name. Placeholder text
 is not a substitute for a label. Decorative icons inside controls should not
 be the only indication of their purpose.
 
+`Label` accepts only the `cursor` atom. To style it, pass a `className`, or
+wrap its content in `Text` or `Box`.
+
 Interactive form controls and event handlers belong in a Next.js Client
 Component. Keep server-rendered form content outside the client boundary where
 possible.

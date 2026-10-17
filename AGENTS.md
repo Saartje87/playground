@@ -12,8 +12,12 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 
 ### UI: use `@blockle/blocks`
 
-- Build UI from `@blockle/blocks` components first. Check `docs/components/README.md` before writing a custom element.
-- Only fall back to plain HTML plus a vanilla-extract `.css.ts` file when Blocks has no equivalent. Style with `vars` tokens from `@blockle/blocks`; no hard-coded colours or spacing, no inline `style`.
+- Before writing or changing any `.tsx`, read `docs/components/README.md` and the guide for what you are building: `forms.md` (inputs, Textarea, Label), `layout.md` (Stack, Inline, Grid, `asChild`), `typography.md` (Text, Heading), `styling.md` (Box props, atoms, `vars` tokens, breakpoints).
+- Build UI from `@blockle/blocks` components first.
+- If the docs and the installed types (`node_modules/@blockle/blocks*/dist`) disagree, the types win. Fix the docs in the same change.
+- Prefer atom props (`Box`, `Text`, `Heading`, `Stack`, `Inline`) over new `.css.ts` classes; see `docs/components/styling.md`. Only fall back to plain HTML plus a vanilla-extract `.css.ts` file when Blocks has no equivalent or atoms cannot express the style. Style with `vars` tokens from `@blockle/blocks`; no hard-coded colours or spacing, no inline `style`.
+- In `.css.ts` files use logical CSS properties (`inlineSize`, `paddingBlock`, `marginInline`, `borderInlineStart`), not physical ones (`width`, `padding-top`, `border-left`).
+- When upgrading `@blockle/blocks`, check `docs/` against the new package's types and atoms and update them in the same change.
 - Links: use the `AppLink` component (`src/components/app-link/app-link.tsx`), never `next/link` directly.
 
 ### Components

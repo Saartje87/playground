@@ -29,3 +29,15 @@ import { Text } from "@blockle/blocks";
 `Text` supports `asChild` when another component must supply the rendered
 element. Keep the resulting HTML semantics meaningful.
 
+`Heading` and `Text` accept the text atoms plus margin and padding, but not
+`backgroundColor`, borders, or layout atoms; see
+[Styling](./styling.md#which-component-accepts-which-atoms). `Text` renders
+only `del`, `em`, `ins`, `label`, `p`, `s`, `small`, `span`, `strong`, `sub`,
+or `sup`; for `code` or other elements, use `Box asChild`:
+
+```tsx
+<Box asChild fontFamily="mono" whiteSpace="pre-wrap">
+  <code>{value}</code>
+</Box>
+```
+

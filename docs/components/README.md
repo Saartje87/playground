@@ -1,11 +1,11 @@
 # Blockle Blocks component guide
 
 Practical guidance for choosing and using the public React exports from
-`@blockle/blocks`. Examples are based on the source package's stories, tests,
-and usage in the Retro app.
+`@blockle/blocks`. Examples are based on the package's types, stories, and
+tests, and on how this project uses it.
 
-For installation, Vanilla Extract configuration, and the root provider setup,
-see [Blockle Blocks setup](../blockle-blocks-setup.md).
+For how Blocks is configured in this project (Vanilla Extract, the theme
+provider, and tests), see [Blockle Blocks setup](../blockle-blocks-setup.md).
 
 ## Guides
 
@@ -15,6 +15,7 @@ see [Blockle Blocks setup](../blockle-blocks-setup.md).
   notifications.
 - [Forms](./forms.md): actions and form controls.
 - [Layout](./layout.md): composition primitives and spacing.
+- [Styling](./styling.md): atoms, breakpoints, and `vars` tokens.
 - [Navigation](./navigation.md): links and router integration.
 - [Overlays](./overlays.md): dialogs, drawers, popovers, portals, and tooltips.
 - [Providers](./providers.md): theme context and reset styles.
