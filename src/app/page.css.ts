@@ -1,15 +1,6 @@
 import { vars } from '@blockle/blocks';
 import { style } from '@vanilla-extract/css';
 
-export const grid = style({
-  listStyle: 'none',
-  margin: 0,
-  padding: 0,
-  display: 'grid',
-  gap: vars.space[4],
-  gridTemplateColumns: 'repeat(auto-fill, minmax(16rem, 1fr))',
-});
-
 export const card = style({
   display: 'flex',
   flexDirection: 'column',

@@ -1,4 +1,4 @@
-import { Heading, Stack, Text } from '@blockle/blocks';
+import { Grid, GridItem, Heading, Stack, Text } from '@blockle/blocks';
 
 import { AppLink } from '../components/app-link/app-link.tsx';
 import { projects } from '../config/projects.ts';
@@ -9,16 +9,16 @@ export default function HomePage() {
     <Stack gap={5} padding={5}>
       <Heading level={1}>Playground</Heading>
 
-      <ul className={styles.grid}>
+      <Grid gap={4} role="list">
         {projects.map((project) => (
-          <li key={project.href}>
+          <GridItem key={project.href} colSpan={[12, 6, 4]} role="listitem">
             <AppLink href={project.href} className={styles.card}>
               <Heading level={2}>{project.title}</Heading>
               <Text>{project.description}</Text>
             </AppLink>
-          </li>
+          </GridItem>
         ))}
-      </ul>
+      </Grid>
     </Stack>
   );
 }

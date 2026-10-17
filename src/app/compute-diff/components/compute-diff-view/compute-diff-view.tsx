@@ -1,15 +1,7 @@
 'use client';
 
-import {
-  Grid,
-  GridItem,
-  Heading,
-  Label,
-  Stack,
-  Text,
-  Textarea,
-} from '@blockle/blocks';
-import { useDeferredValue, useEffect, useMemo, useState } from 'react';
+import { Heading, Label, Stack, Text, Textarea } from '@blockle/blocks';
+import { useEffect, useMemo, useState } from 'react';
 
 import {
   type Change,
@@ -51,11 +43,8 @@ function parse(text: string): Parsed {
 export function ComputeDiffView() {
   const [before, setBefore] = useState(SAMPLE_BEFORE);
   const [after, setAfter] = useState(SAMPLE_AFTER);
-  const deferredBefore = useDeferredValue(before);
-  const deferredAfter = useDeferredValue(after);
-
-  const parsedBefore = useMemo(() => parse(deferredBefore), [deferredBefore]);
-  const parsedAfter = useMemo(() => parse(deferredAfter), [deferredAfter]);
+  const parsedBefore = useMemo(() => parse(before), [before]);
+  const parsedAfter = useMemo(() => parse(after), [after]);
 
   const [lastChanges, setLastChanges] = useState<Change[]>(() =>
     computeDiff(
@@ -71,59 +60,128 @@ export function ComputeDiffView() {
     }
   }, [parsedBefore, parsedAfter]);
 
-  return (
-    <Stack gap={5} padding={5}>
-      <Heading level={1}>Compute Diff</Heading>
+  const isStale = parsedBefore.error !== null || parsedAfter.error !== null;
+  const counts = lastChanges.reduce(
+    (summary, change) => {
+      summary[change.op]++;
+      return summary;
+    },
+    { add: 0, remove: 0, replace: 0 },
+  );
 
-      <Grid gap={4}>
-        <GridItem colSpan={[12, 6]}>
-          <Stack gap={2}>
-            <Label htmlFor="before">Original</Label>
+  return (
+    <main className={styles.page}>
+      <Stack className={styles.workspace} gap={5}>
+        <header className={styles.hero}>
+          <Text className={styles.eyebrow}>JSON WORKSPACE</Text>
+          <Heading className={styles.title} level={1}>
+            JSON Diff
+          </Heading>
+          <Text className={styles.subtitle}>
+            Compare two JSON documents. Changes update as you edit.
+          </Text>
+        </header>
+
+        <section aria-label="JSON documents" className={styles.editors}>
+          <Stack className={styles.editor} gap={2}>
+            <Label className={styles.editorLabel} htmlFor="before">
+              <span className={styles.editorNumber}>01</span> Original
+            </Label>
             <Textarea
               id="before"
+              aria-describedby={parsedBefore.error ? 'before-error' : undefined}
+              aria-invalid={parsedBefore.error !== null}
               className={styles.textarea}
               value={before}
               onChange={(e) => setBefore(e.target.value)}
               spellCheck={false}
               grow
+              maxHeight={800}
             />
             {parsedBefore.error && (
-              <Text className={styles.error}>{parsedBefore.error}</Text>
+              <Text className={styles.error} id="before-error" role="alert">
+                {parsedBefore.error}
+              </Text>
             )}
           </Stack>
-        </GridItem>
-        <GridItem colSpan={[12, 6]}>
-          <Stack gap={2}>
-            <Label htmlFor="after">Modified</Label>
+
+          <Stack className={styles.editor} gap={2}>
+            <Label className={styles.editorLabel} htmlFor="after">
+              <span className={styles.editorNumber}>02</span> Modified
+            </Label>
             <Textarea
               id="after"
+              aria-describedby={parsedAfter.error ? 'after-error' : undefined}
+              aria-invalid={parsedAfter.error !== null}
               className={styles.textarea}
               value={after}
               onChange={(e) => setAfter(e.target.value)}
               spellCheck={false}
+              grow
+              maxHeight={800}
             />
             {parsedAfter.error && (
-              <Text className={styles.error}>{parsedAfter.error}</Text>
+              <Text className={styles.error} id="after-error" role="alert">
+                {parsedAfter.error}
+              </Text>
             )}
           </Stack>
-        </GridItem>
-      </Grid>
+        </section>
 
-      <Stack gap={2}>
-        <Heading level={2}>Diff</Heading>
-        {lastChanges.length === 0 ? (
-          <Text>No differences</Text>
-        ) : (
-          <ul className={styles.list}>
-            {lastChanges.map((change) => (
-              <ChangeRow
-                key={`${change.op}:${formatPath(change.path)}`}
-                change={change}
-              />
-            ))}
-          </ul>
-        )}
+        <section aria-labelledby="diff-heading" className={styles.results}>
+          <div className={styles.resultsHeading}>
+            <div>
+              <Text className={`${styles.eyebrow} ${styles.resultEyebrow}`}>
+                LIVE RESULTS
+              </Text>
+              <Heading
+                className={styles.resultsTitle}
+                id="diff-heading"
+                level={2}
+              >
+                Diff
+              </Heading>
+            </div>
+            {isStale && (
+              <Text className={styles.stale} role="status">
+                Showing last valid diff
+              </Text>
+            )}
+          </div>
+
+          <section aria-label="Change summary" className={styles.summary}>
+            <div className={styles.total}>
+              <span className={styles.totalCount}>{lastChanges.length}</span>
+              <span className={styles.totalLabel}>total changes</span>
+            </div>
+            <div className={styles.metric}>
+              <span className={styles.addCount}>{counts.add}</span>
+              <span>Added</span>
+            </div>
+            <div className={styles.metric}>
+              <span className={styles.removeCount}>{counts.remove}</span>
+              <span>Removed</span>
+            </div>
+            <div className={styles.metric}>
+              <span className={styles.replaceCount}>{counts.replace}</span>
+              <span>Replaced</span>
+            </div>
+          </section>
+
+          {lastChanges.length === 0 ? (
+            <Text className={styles.emptyState}>No differences</Text>
+          ) : (
+            <ul className={styles.list}>
+              {lastChanges.map((change) => (
+                <ChangeRow
+                  key={`${change.op}:${formatPath(change.path)}`}
+                  change={change}
+                />
+              ))}
+            </ul>
+          )}
+        </section>
       </Stack>
-    </Stack>
+    </main>
   );
 }

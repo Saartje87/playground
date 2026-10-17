@@ -27,7 +27,7 @@ describe('ChangeRow', () => {
     expect(screen.getByText('"x"')).toBeInTheDocument();
   });
 
-  it('shows old and new for a replace, and names the root', () => {
+  it('labels old and new values for a replace, and names the root', () => {
     renderWithTheme(
       <ul>
         <ChangeRow
@@ -37,6 +37,9 @@ describe('ChangeRow', () => {
     );
 
     expect(screen.getByText('(root)')).toBeInTheDocument();
-    expect(screen.getByText('1 → 2')).toBeInTheDocument();
+    expect(screen.getByText('Old')).toBeInTheDocument();
+    expect(screen.getByText('New')).toBeInTheDocument();
+    expect(screen.getByText('1')).toBeInTheDocument();
+    expect(screen.getByText('2')).toBeInTheDocument();
   });
 });

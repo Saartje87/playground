@@ -15,4 +15,11 @@ describe('HomePage', () => {
       ).toHaveAttribute('href', project.href);
     }
   });
+
+  it('lists the projects as list items', () => {
+    renderWithTheme(<HomePage />);
+
+    expect(screen.getByRole('list')).toBeInTheDocument();
+    expect(screen.getAllByRole('listitem')).toHaveLength(projects.length);
+  });
 });
