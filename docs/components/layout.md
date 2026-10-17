@@ -1,0 +1,62 @@
+# Layout
+
+Use layout primitives to compose content and apply consistent spacing. They
+are not semantic content by themselves: choose a meaningful element when the
+group represents a list, navigation, or other structured content.
+
+## Choosing a primitive
+
+- **`Box`** is a general-purpose container for grouping content and applying
+  style atoms.
+- **`Flex`** is for row or column composition using flex layout.
+- **`Grid`** is for two-dimensional layouts. Use it when both row and column
+  relationships matter.
+- **`GridItem`** is a child placed in a `Grid`; use it to control an item's
+  placement or to compose the child element with `asChild`.
+- **`Inline`** groups items horizontally. Use `gap` for consistent spacing.
+- **`Stack`** groups items vertically. Use `gap` rather than individual
+  margins for consistent rhythm.
+
+```tsx
+import { Alert, Button, Stack } from "@blockle/blocks";
+
+<Stack gap={2}>
+  <Alert open={hasError}>Could not save changes.</Alert>
+  <Button onClick={save}>Save changes</Button>
+</Stack>;
+```
+
+`Stack` and `Inline` support a semantic `tag`; use it when the children form
+something meaningful, such as an ordered list. The same visual arrangement
+can have different semantics, so choose the tag based on the content rather
+than its appearance.
+
+## Style atoms and composition
+
+Layout primitives accept atomic style props such as spacing and color. Prefer
+these shared tokens for common layout needs instead of creating one-off
+styles.
+
+Some primitives, including `Box`, `GridItem`, and `Inline`, support `asChild`.
+Use it to pass the rendered element through a child component when composition
+requires a specific semantic element. It differs from wrapping that child in
+the primitive's default element.
+
+
+## Responsive grids
+
+`Grid` is a 12-column grid. Set the spacing with `gap`, `columnGap`, or
+`rowGap`, and place each child in a `GridItem`. `GridItem` takes a required
+`colSpan` (1-12) and an optional `rowSpan` (1-12). Both accept a responsive
+array that lists values per breakpoint, from smallest to largest: `mobile`,
+`tablet` (740px), `desktop` (992px), and `wide` (1200px). Omitted breakpoints
+inherit the previous value.
+
+```tsx
+import { Grid, GridItem } from "@blockle/blocks";
+
+<Grid gap={4}>
+  <GridItem colSpan={[12, 6]}>Stacked on mobile, side by side from tablet</GridItem>
+  <GridItem colSpan={[12, 6]}>Second column</GridItem>
+</Grid>;
+```
