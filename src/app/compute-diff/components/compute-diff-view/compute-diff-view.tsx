@@ -240,7 +240,12 @@ export const ComputeDiffView: FC = () => {
                 padding={3}
               >
                 <section aria-label="Change summary">
-                  <Box className={styles.total} display="flex" gap={2}>
+                  <Box
+                    alignItems="baseline"
+                    className={styles.total}
+                    display="flex"
+                    gap={2}
+                  >
                     <Text color="text-200" fontSize="large" fontWeight="bold">
                       {lastChanges.length}
                     </Text>

@@ -18,6 +18,7 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Prefer atom props (`Box`, `Text`, `Heading`, `Stack`, `Inline`) over new `.css.ts` classes; see `docs/components/styling.md`. Only fall back to plain HTML plus a vanilla-extract `.css.ts` file when Blocks has no equivalent or atoms cannot express the style. Style with `vars` tokens from `@blockle/blocks`; no hard-coded colours or spacing, no inline `style`.
 - In `.css.ts` files use logical CSS properties (`inlineSize`, `paddingBlock`, `marginInline`, `borderInlineStart`), not physical ones (`width`, `padding-top`, `border-left`).
 - When upgrading `@blockle/blocks`, check `docs/` against the new package's types and atoms and update them in the same change.
+- Blocks feedback: while working, note friction with Blocks, such as a missing component, prop or atom, a workaround that needed custom CSS, an inconsistent API, or a docs gap. At the end of the task, add a short "Blocks feedback" section to your reply with what you hit, the workaround you used, and a suggested improvement. Skip the section if there was nothing. Don't change the library or open issues unless asked.
 - Links: use the `AppLink` component (`src/components/app-link/app-link.tsx`), never `next/link` directly.
 
 ### Components

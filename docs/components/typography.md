@@ -32,12 +32,13 @@ element. Keep the resulting HTML semantics meaningful.
 `Heading` and `Text` accept the text atoms plus margin and padding, but not
 `backgroundColor`, borders, or layout atoms; see
 [Styling](./styling.md#which-component-accepts-which-atoms). `Text` renders
-only `del`, `em`, `ins`, `label`, `p`, `s`, `small`, `span`, `strong`, `sub`,
-or `sup`; for `code` or other elements, use `Box asChild`:
+only `cite`, `code`, `del`, `em`, `ins`, `kbd`, `label`, `mark`, `p`, `q`, `s`,
+`small`, `span`, `strong`, `sub`, or `sup`; for other elements, use
+`Box asChild`:
 
 ```tsx
-<Box asChild fontFamily="mono" whiteSpace="pre-wrap">
-  <code>{value}</code>
-</Box>
+<Text tag="code" fontFamily="mono" whiteSpace="pre-wrap">
+  {value}
+</Text>
 ```
 

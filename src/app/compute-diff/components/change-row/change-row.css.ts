@@ -18,7 +18,6 @@ export const shrinkable = style({
 });
 
 export const value = style({
-  alignItems: 'baseline',
   minInlineSize: 0,
 });
 

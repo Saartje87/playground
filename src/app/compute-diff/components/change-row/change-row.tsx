@@ -32,14 +32,14 @@ type CodeProps = { children: string };
 
 const Code: FC<CodeProps> = ({ children }) => {
   return (
-    <Box
-      asChild
+    <Text
       className={styles.code}
       fontFamily="mono"
+      tag="code"
       whiteSpace="pre-wrap"
     >
-      <code>{children}</code>
-    </Box>
+      {children}
+    </Text>
   );
 };
 
@@ -63,7 +63,13 @@ type ValueProps = { label?: string; value: JsonValue };
 
 const Value: FC<ValueProps> = ({ label, value }) => {
   return (
-    <Box className={styles.value} display="flex" flexWrap="wrap" gap={2}>
+    <Box
+      alignItems="baseline"
+      className={styles.value}
+      display="flex"
+      flexWrap="wrap"
+      gap={2}
+    >
       {label && <ValueLabel>{label}</ValueLabel>}
       <Code>{show(value)}</Code>
     </Box>

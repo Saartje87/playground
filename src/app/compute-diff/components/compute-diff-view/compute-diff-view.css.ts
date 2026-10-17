@@ -81,7 +81,6 @@ export const summary = style({
 
 export const total = style({
   gridColumn: '1 / -1',
-  alignItems: 'baseline',
   '@media': {
     'screen and (min-width: 40rem)': {
       gridColumn: 'auto',

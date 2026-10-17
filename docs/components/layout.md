@@ -34,13 +34,13 @@ something meaningful, such as an ordered list. The same visual arrangement
 can have different semantics, so choose the tag based on the content rather
 than its appearance.
 
-`Stack` and `Inline` only accept `gap`, `display`, margin, and padding atoms.
-When you need more (for example `alignItems="baseline"`, which no atom
-provides, or a background), use a `Box` or a `className`.
+`Stack` and `Inline` accept every atom except `flexDirection`, so
+`backgroundColor`, `padding`, `alignItems="baseline"` and so on work directly.
+`gap` is required. Use `alignX` / `alignY` for alignment along each axis.
 
 ## Composition with `asChild`
 
-Some primitives, including `Box`, `GridItem`, and `Inline`, support `asChild`.
+Some primitives, including `Box` and `GridItem`, support `asChild`.
 Use it to pass the rendered element through a child component when composition
 requires a specific semantic element, such as a `li`, `section`, or `header`.
 It differs from wrapping that child in the primitive's default element.

@@ -13,7 +13,7 @@ properties) live in [AGENTS.md](../../AGENTS.md).
 | --- | --- |
 | `Box`, `Flex` | All atoms |
 | `Text`, `Heading` | Text atoms (`color`, `fontFamily`, `fontSize`, `fontStyle`, `fontWeight`, `lineHeight`, `textAlign`, `textDecoration`, `textTransform`, `textWrap`, `whiteSpace`, `wordBreak`, `wordWrap`) plus margin and padding |
-| `Stack`, `Inline` | `gap`, `display`, margin, and padding |
+| `Stack`, `Inline` | All atoms except `flexDirection` (`gap` is required) |
 | `Grid` | `gap`, `columnGap`, `rowGap` |
 | `Label` | `cursor` only |
 
@@ -54,7 +54,7 @@ values; match them if you write your own media queries.
 | Flex | `flexDirection` | `row`, `row-reverse`, `column`, `column-reverse` |
 | Flex | `flexWrap` | `nowrap`, `wrap` |
 | Flex | `flex`, `flexGrow`, `flexShrink` | `flex`: `1`; `flexGrow` and `flexShrink`: `0` or `1` |
-| Alignment | `alignItems`, `alignSelf`, `alignContent`, `placeItems` | `stretch`, `center`, `flex-start`, `flex-end` (no `baseline`) |
+| Alignment | `alignItems`, `alignSelf`, `alignContent`, `placeItems` | `stretch`, `center`, `flex-start`, `flex-end`, `baseline` |
 | Alignment | `justifyContent` | `flex-start`, `flex-end`, `center`, `space-between`, `space-around` |
 | Typography | `fontSize` | `xsmall`, `small`, `medium`, `large`, `xlarge` |
 | Position | `position` | `relative`, `fixed`, `absolute`, `sticky`, `static` |
