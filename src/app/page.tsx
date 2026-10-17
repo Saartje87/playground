@@ -1,10 +1,11 @@
 import { Grid, GridItem, Heading, Stack, Text } from '@blockle/blocks';
+import type { FC } from 'react';
 
 import { AppLink } from '../components/app-link/app-link.tsx';
 import { projects } from '../config/projects.ts';
 import * as styles from './page.css.ts';
 
-export default function HomePage() {
+const HomePage: FC = () => {
   return (
     <Stack gap={5} padding={5}>
       <Heading level={1}>Playground</Heading>
@@ -21,4 +22,6 @@ export default function HomePage() {
       </Grid>
     </Stack>
   );
-}
+};
+
+export default HomePage;

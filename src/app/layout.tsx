@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import '@blockle/blocks/reset';
 import { BlocksProvider } from '@blockle/blocks';
 import { momotaro } from '@blockle/blocks-theme-momotaro';
+import type { FC } from 'react';
 
 import { SiteNav } from '../components/site-nav/site-nav.tsx';
 
@@ -21,7 +22,7 @@ export const metadata: Metadata = {
   description: 'A collection of small experiments.',
 };
 
-export default function RootLayout({ children }: LayoutProps<'/'>) {
+const RootLayout: FC<LayoutProps<'/'>> = ({ children }) => {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
@@ -32,4 +33,6 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       </body>
     </html>
   );
-}
+};
+
+export default RootLayout;

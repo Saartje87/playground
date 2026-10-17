@@ -27,9 +27,36 @@ do not use it merely to add another wrapper.
 - **`TextInput`** is for a single-line value. Give it a useful `name` and
   associate it with a `Label`.
 - **`Textarea`** is for free-form multi-line text, such as a description.
-  Give it a useful `name` and a label.
+  Give it a useful `name` and a label. See [Textarea sizing and
+  styling](#textarea-sizing-and-styling).
 - **`NumericInput`** is for a numeric value. Use it instead of a text field
   when the value is inherently numeric.
+
+## Textarea sizing and styling
+
+`Textarea` renders a wrapper `Box` around the native `<textarea>`.
+
+- `className` and other native props go to the `<textarea>`.
+- `containerProps` (`className`, `style`, and other `div` props) go to the
+  wrapper.
+- `grow` makes the textarea grow with its content. It is a behavior prop, not
+  a class name: it adds an internal hashed class that sets
+  `field-sizing: content`, so you will not see a literal `grow` class in the
+  DOM. It needs browser support for `field-sizing`.
+- `maxHeight` only has an effect together with `grow`, and is applied to the
+  wrapper's inline `style`, not to the `<textarea>`. The textarea itself keeps
+  growing past the limit; the wrapper stops at `maxHeight` and scrolls
+  (`overflow: auto` comes from the theme), so the cap works but the scrollbar
+  belongs to the wrapper.
+
+```tsx
+<Textarea
+  grow
+  maxHeight={400}
+  className={styles.textarea}
+  containerProps={{ className: styles.wrapper }}
+/>
+```
 
 ## Choices
 

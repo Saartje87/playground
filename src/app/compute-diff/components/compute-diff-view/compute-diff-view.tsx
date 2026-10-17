@@ -1,7 +1,7 @@
 'use client';
 
-import { Heading, Label, Stack, Text, Textarea } from '@blockle/blocks';
-import { useEffect, useMemo, useState } from 'react';
+import { Box, Heading, Label, Stack, Text, Textarea } from '@blockle/blocks';
+import { type FC, useEffect, useMemo, useState } from 'react';
 
 import {
   type Change,
@@ -13,13 +13,13 @@ import { ChangeRow } from '../change-row/change-row.tsx';
 import * as styles from './compute-diff-view.css.ts';
 
 const SAMPLE_BEFORE = `{
-  "name": "saartje",
+  "name": "barry",
   "tags": ["a", "b"],
-  "address": { "city": "Utrecht", "zip": "3511" }
+  "address": { "city": "Groningen", "zip": "3511" }
 }`;
 
 const SAMPLE_AFTER = `{
-  "name": "saartje",
+  "name": "barry",
   "tags": ["a", "c", "d"],
   "address": { "city": "Amsterdam" },
   "active": true
@@ -40,7 +40,7 @@ function parse(text: string): Parsed {
   }
 }
 
-export function ComputeDiffView() {
+export const ComputeDiffView: FC = () => {
   const [before, setBefore] = useState(SAMPLE_BEFORE);
   const [after, setAfter] = useState(SAMPLE_AFTER);
   const parsedBefore = useMemo(() => parse(before), [before]);
@@ -70,118 +70,234 @@ export function ComputeDiffView() {
   );
 
   return (
-    <main className={styles.page}>
-      <Stack className={styles.workspace} gap={5}>
-        <header className={styles.hero}>
-          <Text className={styles.eyebrow}>JSON WORKSPACE</Text>
-          <Heading className={styles.title} level={1}>
-            JSON Diff
-          </Heading>
-          <Text className={styles.subtitle}>
-            Compare two JSON documents. Changes update as you edit.
-          </Text>
-        </header>
-
-        <section aria-label="JSON documents" className={styles.editors}>
-          <Stack className={styles.editor} gap={2}>
-            <Label className={styles.editorLabel} htmlFor="before">
-              <span className={styles.editorNumber}>01</span> Original
-            </Label>
-            <Textarea
-              id="before"
-              aria-describedby={parsedBefore.error ? 'before-error' : undefined}
-              aria-invalid={parsedBefore.error !== null}
-              className={styles.textarea}
-              value={before}
-              onChange={(e) => setBefore(e.target.value)}
-              spellCheck={false}
-              grow
-              maxHeight={800}
-            />
-            {parsedBefore.error && (
-              <Text className={styles.error} id="before-error" role="alert">
-                {parsedBefore.error}
-              </Text>
-            )}
-          </Stack>
-
-          <Stack className={styles.editor} gap={2}>
-            <Label className={styles.editorLabel} htmlFor="after">
-              <span className={styles.editorNumber}>02</span> Modified
-            </Label>
-            <Textarea
-              id="after"
-              aria-describedby={parsedAfter.error ? 'after-error' : undefined}
-              aria-invalid={parsedAfter.error !== null}
-              className={styles.textarea}
-              value={after}
-              onChange={(e) => setAfter(e.target.value)}
-              spellCheck={false}
-              grow
-              maxHeight={800}
-            />
-            {parsedAfter.error && (
-              <Text className={styles.error} id="after-error" role="alert">
-                {parsedAfter.error}
-              </Text>
-            )}
-          </Stack>
-        </section>
-
-        <section aria-labelledby="diff-heading" className={styles.results}>
-          <div className={styles.resultsHeading}>
-            <div>
-              <Text className={`${styles.eyebrow} ${styles.resultEyebrow}`}>
-                LIVE RESULTS
+    <Box
+      asChild
+      backgroundColor="background-200"
+      className={styles.page}
+      paddingBlock={[5, 6]}
+      paddingInline={[4, 5]}
+    >
+      <main>
+        <Stack className={styles.workspace} gap={5} marginInline="auto">
+          <Box asChild paddingBlockStart={4} paddingBlockEnd={3}>
+            <header>
+              <Text
+                className={styles.eyebrow}
+                color="primary-600"
+                fontFamily="mono"
+                fontSize="xsmall"
+                fontWeight="bold"
+              >
+                JSON WORKSPACE
               </Text>
               <Heading
-                className={styles.resultsTitle}
-                id="diff-heading"
-                level={2}
+                className={styles.title}
+                color="text-800"
+                level={1}
+                marginBlock={2}
               >
-                Diff
+                JSON Diff
               </Heading>
-            </div>
-            {isStale && (
-              <Text className={styles.stale} role="status">
-                Showing last valid diff
+              <Text color="text-600" fontSize="large">
+                Compare two JSON documents. Changes update as you edit.
               </Text>
-            )}
-          </div>
+            </header>
+          </Box>
 
-          <section aria-label="Change summary" className={styles.summary}>
-            <div className={styles.total}>
-              <span className={styles.totalCount}>{lastChanges.length}</span>
-              <span className={styles.totalLabel}>total changes</span>
-            </div>
-            <div className={styles.metric}>
-              <span className={styles.addCount}>{counts.add}</span>
-              <span>Added</span>
-            </div>
-            <div className={styles.metric}>
-              <span className={styles.removeCount}>{counts.remove}</span>
-              <span>Removed</span>
-            </div>
-            <div className={styles.metric}>
-              <span className={styles.replaceCount}>{counts.replace}</span>
-              <span>Replaced</span>
-            </div>
+          <section aria-label="JSON documents" className={styles.editors}>
+            {(
+              [
+                {
+                  id: 'before',
+                  number: '01',
+                  label: 'Original',
+                  value: before,
+                  onChange: setBefore,
+                  error: parsedBefore.error,
+                },
+                {
+                  id: 'after',
+                  number: '02',
+                  label: 'Modified',
+                  value: after,
+                  onChange: setAfter,
+                  error: parsedAfter.error,
+                },
+              ] as const
+            ).map((editor) => (
+              <Box
+                key={editor.id}
+                backgroundColor="background-700"
+                borderColor="background-600"
+                borderRadius={2}
+                borderStyle="solid"
+                borderWidth="thin"
+                boxShadow={2}
+                className={styles.editor}
+                display="flex"
+                flexDirection="column"
+                gap={2}
+                padding={4}
+              >
+                <Label className={styles.editorLabel} htmlFor={editor.id}>
+                  <Text color="text-400" fontFamily="mono" fontSize="xsmall">
+                    {editor.number}
+                  </Text>{' '}
+                  {editor.label}
+                </Label>
+                <Textarea
+                  id={editor.id}
+                  aria-describedby={
+                    editor.error ? `${editor.id}-error` : undefined
+                  }
+                  aria-invalid={editor.error !== null}
+                  className={styles.textarea}
+                  value={editor.value}
+                  onChange={(e) => editor.onChange(e.target.value)}
+                  spellCheck={false}
+                  grow
+                  maxHeight={800}
+                />
+                {editor.error && (
+                  <Text
+                    color="danger-300"
+                    fontFamily="mono"
+                    fontSize="xsmall"
+                    id={`${editor.id}-error`}
+                    role="alert"
+                    wordWrap="break-word"
+                  >
+                    {editor.error}
+                  </Text>
+                )}
+              </Box>
+            ))}
           </section>
 
-          {lastChanges.length === 0 ? (
-            <Text className={styles.emptyState}>No differences</Text>
-          ) : (
-            <ul className={styles.list}>
-              {lastChanges.map((change) => (
-                <ChangeRow
-                  key={`${change.op}:${formatPath(change.path)}`}
-                  change={change}
-                />
-              ))}
-            </ul>
-          )}
-        </section>
-      </Stack>
-    </main>
+          <Box
+            asChild
+            backgroundColor="background-700"
+            borderColor="background-600"
+            borderRadius={2}
+            borderStyle="solid"
+            borderWidth="thin"
+            boxShadow={2}
+            color="text-200"
+            display="flex"
+            flexDirection="column"
+            gap={3}
+            padding={4}
+          >
+            <section aria-labelledby="diff-heading">
+              <Box
+                alignItems="flex-end"
+                display="flex"
+                flexWrap="wrap"
+                gap={2}
+                justifyContent="space-between"
+              >
+                <div>
+                  <Text
+                    className={styles.eyebrow}
+                    color="primary-300"
+                    fontFamily="mono"
+                    fontSize="xsmall"
+                    fontWeight="bold"
+                  >
+                    LIVE RESULTS
+                  </Text>
+                  <Heading
+                    color="text-200"
+                    id="diff-heading"
+                    level={2}
+                    marginBlockStart={1}
+                  >
+                    Diff
+                  </Heading>
+                </div>
+                {isStale && (
+                  <Box
+                    backgroundColor="warning-100"
+                    borderRadius={1}
+                    color="warning-900"
+                    fontSize="xsmall"
+                    fontWeight="bold"
+                    paddingBlock={1}
+                    paddingInline={2}
+                    role="status"
+                  >
+                    Showing last valid diff
+                  </Box>
+                )}
+              </Box>
+
+              <Box
+                asChild
+                backgroundColor="background-800"
+                borderRadius={1}
+                className={styles.summary}
+                gap={2}
+                padding={3}
+              >
+                <section aria-label="Change summary">
+                  <Box className={styles.total} display="flex" gap={2}>
+                    <Text color="text-200" fontSize="large" fontWeight="bold">
+                      {lastChanges.length}
+                    </Text>
+                    <Text color="text-300" fontSize="xsmall">
+                      total changes
+                    </Text>
+                  </Box>
+                  {(
+                    [
+                      ['add', 'Added', 'success-300'],
+                      ['remove', 'Removed', 'danger-300'],
+                      ['replace', 'Replaced', 'warning-400'],
+                    ] as const
+                  ).map(([op, label, color]) => (
+                    <Box
+                      key={op}
+                      alignItems="center"
+                      color="text-300"
+                      display="flex"
+                      fontSize="xsmall"
+                      fontWeight="bold"
+                      gap={2}
+                    >
+                      <Text color={color} fontFamily="mono" fontSize="medium">
+                        {counts[op]}
+                      </Text>
+                      <span>{label}</span>
+                    </Box>
+                  ))}
+                </section>
+              </Box>
+
+              {lastChanges.length === 0 ? (
+                <Text
+                  color="text-300"
+                  fontFamily="mono"
+                  paddingBlock={5}
+                  paddingInline={3}
+                  tag="p"
+                  textAlign="center"
+                >
+                  No differences
+                </Text>
+              ) : (
+                <Stack className={styles.list} gap={2} tag="ul">
+                  {lastChanges.map((change) => (
+                    <ChangeRow
+                      key={`${change.op}:${formatPath(change.path)}`}
+                      change={change}
+                    />
+                  ))}
+                </Stack>
+              )}
+            </section>
+          </Box>
+        </Stack>
+      </main>
+    </Box>
   );
-}
+};

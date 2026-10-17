@@ -16,6 +16,12 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 - Only fall back to plain HTML plus a vanilla-extract `.css.ts` file when Blocks has no equivalent. Style with `vars` tokens from `@blockle/blocks`; no hard-coded colours or spacing, no inline `style`.
 - Links: use the `AppLink` component (`src/components/app-link/app-link.tsx`), never `next/link` directly.
 
+### Components
+
+- Declare every React component as a typed arrow function: `export const Foo: FC<FooProps> = ({ a }) => ...`, or `FC` when it takes no props. Import `type FC` from `react`. Do not use `function Foo()` declarations or inline-annotated props.
+- Define props as a named `type FooProps = { ... }` above the component (or reuse the library's props type). This applies to pages and layouts too: `const Page: FC = ...; export default Page;`.
+- Plain helper functions that are not components (e.g. `parse`) stay as normal functions.
+
 ### Structure
 
 - Each sub-project is one folder in `src/app/<name>/`: `page.tsx`, `components/`, and `lib/` for pure logic. Register it in `src/config/projects.ts` and give its page a `metadata` title.
