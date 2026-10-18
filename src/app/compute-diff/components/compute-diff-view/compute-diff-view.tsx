@@ -155,8 +155,12 @@ export const ComputeDiffView: FC = () => {
                   value={editor.value}
                   onChange={(e) => editor.onChange(e.target.value)}
                   spellCheck={false}
+                  containerProps={{
+                    className: styles.textareaWrapper,
+                    flex: 1,
+                  }}
                   grow
-                  maxHeight={800}
+                  maxBlockSize={800}
                 />
                 {editor.error && (
                   <Text

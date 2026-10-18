@@ -1,5 +1,5 @@
 import { vars } from '@blockle/blocks';
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 
 export const page = style({
   minBlockSize: 'calc(100vh - 3rem)',
@@ -35,9 +35,8 @@ export const editor = style({
   minInlineSize: 0,
 });
 
-// Textarea renders its own wrapper div; stretch it so both editors match height.
-globalStyle(`${editor} > div`, {
-  flex: 1,
+// Theme styles for the wrapper outrank the padding and background atoms.
+export const textareaWrapper = style({
   minBlockSize: '16rem',
   padding: 0,
   background: vars.color['background-800'],

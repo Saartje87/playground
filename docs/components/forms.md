@@ -37,24 +37,28 @@ do not use it merely to add another wrapper.
 `Textarea` renders a wrapper `Box` around the native `<textarea>`.
 
 - `className` and other native props go to the `<textarea>`.
-- `containerProps` (`className`, `style`, and other `div` props) go to the
-  wrapper.
+- `containerProps` (`className`, `style`, other `div` props, and any `Box`
+  atom such as `flex`) go to the wrapper. The theme's wrapper `padding` and
+  `background` outrank the atoms, so override those with a `className`.
 - `grow` makes the textarea grow with its content. It is a behavior prop, not
   a class name: it adds an internal hashed class that sets
   `field-sizing: content`, so you will not see a literal `grow` class in the
   DOM. It needs browser support for `field-sizing`.
-- `maxHeight` only has an effect together with `grow`, and is applied to the
-  wrapper's inline `style`, not to the `<textarea>`. The textarea itself keeps
-  growing past the limit; the wrapper stops at `maxHeight` and scrolls
+- `maxBlockSize` only has an effect together with `grow`, and is applied to
+  the wrapper's inline `style`, not to the `<textarea>`. The textarea itself
+  keeps growing past the limit; the wrapper stops at `maxBlockSize` and scrolls
   (`overflow: auto` comes from the theme), so the cap works but the scrollbar
   belongs to the wrapper.
+- To make side-by-side textareas the same height, put them in a flex column
+  parent that stretches, give the wrapper `flex={1}` through `containerProps`,
+  and give the `<textarea>` `min-block-size: 100%`.
 
 ```tsx
 <Textarea
   grow
-  maxHeight={400}
+  maxBlockSize={400}
   className={styles.textarea}
-  containerProps={{ className: styles.wrapper }}
+  containerProps={{ flex: 1, className: styles.wrapper }}
 />
 ```
 

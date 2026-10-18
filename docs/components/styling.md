@@ -14,7 +14,7 @@ properties) live in [AGENTS.md](../../AGENTS.md).
 | `Box`, `Flex` | All atoms |
 | `Text`, `Heading` | Text atoms (`color`, `fontFamily`, `fontSize`, `fontStyle`, `fontWeight`, `lineHeight`, `textAlign`, `textDecoration`, `textTransform`, `textWrap`, `whiteSpace`, `wordBreak`, `wordWrap`) plus margin and padding |
 | `Stack`, `Inline` | All atoms except `flexDirection` (`gap` is required) |
-| `Grid` | `gap`, `columnGap`, `rowGap` |
+| `Grid` | All atoms except `flexDirection` (`display` can be overridden) |
 | `Label` | `cursor` only |
 
 Anything not listed here (for example `backgroundColor` on `Text`) needs a

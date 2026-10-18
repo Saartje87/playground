@@ -55,7 +55,9 @@ import { Box } from "@blockle/blocks";
 
 ## Responsive grids
 
-`Grid` is a 12-column grid. Set the spacing with `gap`, `columnGap`, or
+`Grid` is a 12-column grid whose tracks can shrink below their content, so long
+unbreakable content does not widen it. It accepts the same atoms as `Stack` and
+`Inline`, and merges a custom `className` with its own styles. Set the spacing with `gap`, `columnGap`, or
 `rowGap`, and place each child in a `GridItem`. `GridItem` takes a required
 `colSpan` (1-12) and an optional `rowSpan` (1-12). Both accept a responsive
 array that lists values per breakpoint, from smallest to largest: `mobile`,
