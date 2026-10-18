@@ -25,7 +25,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 | `npm run start` | Serve the production build |
 | `npm test` | Run the tests once |
 | `npm run test:watch` | Run tests in watch mode |
-| `npm run typecheck` | Check TypeScript types |
+| `npm run ts` | Check TypeScript types |
 | `npm run lint` | Check the code with Biome |
 | `npm run check` | Run lint, type checking, and tests |
 
