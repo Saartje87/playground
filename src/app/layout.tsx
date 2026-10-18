@@ -3,7 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import '@blockle/blocks/reset';
 import { BlocksProvider } from '@blockle/blocks';
 import { momotaro } from '@blockle/blocks-theme-momotaro';
-import type { FC } from 'react';
+import type { FC, ReactNode } from 'react';
 
 import { SiteNav } from '../components/site-nav/site-nav.tsx';
 
@@ -22,7 +22,11 @@ export const metadata: Metadata = {
   description: 'A collection of small experiments.',
 };
 
-const RootLayout: FC<LayoutProps<'/'>> = ({ children }) => {
+export type RootLayoutProps = {
+  children: ReactNode;
+};
+
+const RootLayout: FC<RootLayoutProps> = ({ children }) => {
   return (
     <html lang="en" className={`${geistSans.variable} ${geistMono.variable}`}>
       <body>
