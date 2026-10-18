@@ -6,10 +6,10 @@ import { AppLink } from './app-link.tsx';
 
 describe('AppLink', () => {
   it('renders a single anchor pointing at href', () => {
-    renderWithTheme(<AppLink href="/compute-diff">Compute Diff</AppLink>);
+    renderWithTheme(<AppLink href="/json-diff">JSON Diff</AppLink>);
 
-    const link = screen.getByRole('link', { name: 'Compute Diff' });
-    expect(link).toHaveAttribute('href', '/compute-diff');
+    const link = screen.getByRole('link', { name: 'JSON Diff' });
+    expect(link).toHaveAttribute('href', '/json-diff');
     expect(screen.getAllByRole('link')).toHaveLength(1);
   });
 

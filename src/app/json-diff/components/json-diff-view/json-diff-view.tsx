@@ -10,7 +10,7 @@ import {
 } from '../../lib/compute-diff.ts';
 import { formatPath } from '../../lib/format-path.ts';
 import { ChangeRow } from '../change-row/change-row.tsx';
-import * as styles from './compute-diff-view.css.ts';
+import * as styles from './json-diff-view.css.ts';
 
 const SAMPLE_BEFORE = `{
   "name": "barry",
@@ -40,7 +40,7 @@ function parse(text: string): Parsed {
   }
 }
 
-export const ComputeDiffView: FC = () => {
+export const JsonDiffView: FC = () => {
   const [before, setBefore] = useState(SAMPLE_BEFORE);
   const [after, setAfter] = useState(SAMPLE_AFTER);
   const parsedBefore = useMemo(() => parse(before), [before]);

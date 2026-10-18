@@ -6,8 +6,8 @@ export type Project = {
 
 export const projects: Project[] = [
   {
-    href: '/compute-diff',
-    title: 'Compute Diff',
+    href: '/json-diff',
+    title: 'JSON Diff',
     description: 'Compare two JSON documents and see what changed.',
   },
 ];

@@ -32,7 +32,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser.
 ## Project structure
 
 - `src/app/` contains the routes and shared app layout.
-- `src/app/compute-diff/` contains the JSON Diff tool.
+- `src/app/json-diff/` contains the JSON Diff tool.
 - `src/config/projects.ts` lists the experiments shown on the home page.
 - `src/components/` contains shared UI components.
 - `docs/` contains project setup notes and component guides.

@@ -12,7 +12,7 @@ vi.mock('next/navigation', () => ({
 
 describe('SiteNav', () => {
   it('links back to the homepage on a project page', () => {
-    pathname.current = '/compute-diff';
+    pathname.current = '/json-diff';
     renderWithTheme(<SiteNav />);
 
     expect(screen.getByRole('navigation')).toBeInTheDocument();

@@ -3,11 +3,11 @@ import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
 import { renderWithTheme } from '../../../../test/render.tsx';
-import { ComputeDiffView } from './compute-diff-view.tsx';
+import { JsonDiffView } from './json-diff-view.tsx';
 
-describe('ComputeDiffView', () => {
+describe('JsonDiffView', () => {
   it('shows the diff of the sample inputs', () => {
-    renderWithTheme(<ComputeDiffView />);
+    renderWithTheme(<JsonDiffView />);
 
     expect(
       screen.getByRole('heading', { name: 'JSON Diff' }),
@@ -25,7 +25,7 @@ describe('ComputeDiffView', () => {
 
   it('reports no differences when both sides are equal', async () => {
     const user = userEvent.setup();
-    renderWithTheme(<ComputeDiffView />);
+    renderWithTheme(<JsonDiffView />);
 
     await user.clear(screen.getByLabelText('01 Original'));
     await user.clear(screen.getByLabelText('02 Modified'));
@@ -39,7 +39,7 @@ describe('ComputeDiffView', () => {
 
   it('shows a parse error and keeps the previous diff for invalid JSON', async () => {
     const user = userEvent.setup();
-    renderWithTheme(<ComputeDiffView />);
+    renderWithTheme(<JsonDiffView />);
 
     await user.clear(screen.getByLabelText('02 Modified'));
     await user.click(screen.getByLabelText('02 Modified'));
