@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react';
 import { describe, expect, it, vi } from 'vitest';
 
-import { renderWithTheme } from '../../test/render.tsx';
-import { SiteNav } from './site-nav.tsx';
+import { renderWithTheme } from '../../test/render';
+import { SiteNav } from './site-nav';
 
 const pathname = vi.hoisted(() => ({ current: '/' }));
 

@@ -30,10 +30,10 @@ This block is written and re-added by `next dev` — verify at `node_modules/nex
 ### Structure
 
 - Each sub-project is one folder in `src/app/<name>/`: `page.tsx`, `components/`, and `lib/` for pure logic. Register it in `src/config/projects.ts` and give its page a `metadata` title.
-- Every component lives in its own folder, grouped by domain/feature: `components/<name>/{<name>.tsx, <name>.css.ts, <name>.test.tsx}`. Import the component file directly (e.g. `../app-link/app-link.tsx`).
+- Every component lives in its own folder, grouped by domain/feature: `components/<name>/{<name>.tsx, <name>.css.ts, <name>.test.tsx}`. Import the component file directly, without the file extension (e.g. `../app-link/app-link`).
 - No barrel files: never add `index.ts` files that re-export from other modules.
 - `src/components/` is only for code used by two or more projects or by the shell. Keep single-use components in the project's own `components/` folder.
-- Always use relative imports (`../../lib/format-path.ts`), including across feature folders. The `@/` alias is not used.
+- Always use relative imports without file extensions (`../../lib/format-path`), including across feature folders. The `@/` alias is not used.
 
 ### Tests
 

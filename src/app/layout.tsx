@@ -5,7 +5,7 @@ import { BlocksProvider } from '@blockle/blocks';
 import { momotaro } from '@blockle/blocks-theme-momotaro';
 import type { FC, ReactNode } from 'react';
 
-import { SiteNav } from '../components/site-nav/site-nav.tsx';
+import { SiteNav } from '../components/site-nav/site-nav';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',

@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { renderWithTheme } from '../../../../test/render.tsx';
-import { ChangeRow } from './change-row.tsx';
+import { renderWithTheme } from '../../../../test/render';
+import { ChangeRow } from './change-row';
 
 describe('ChangeRow', () => {
   it('shows the new value for an add', () => {

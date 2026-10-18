@@ -1,9 +1,9 @@
 import { Box, Stack, Text } from '@blockle/blocks';
 import type { FC } from 'react';
 
-import type { Change, JsonValue } from '../../lib/compute-diff.ts';
-import { formatPath } from '../../lib/format-path.ts';
-import * as styles from './change-row.css.ts';
+import type { Change, JsonValue } from '../../lib/compute-diff';
+import { formatPath } from '../../lib/format-path';
+import * as styles from './change-row.css';
 
 const show = (v: JsonValue) => JSON.stringify(v);
 

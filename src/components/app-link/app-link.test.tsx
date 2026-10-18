@@ -1,8 +1,8 @@
 import { screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { renderWithTheme } from '../../test/render.tsx';
-import { AppLink } from './app-link.tsx';
+import { renderWithTheme } from '../../test/render';
+import { AppLink } from './app-link';
 
 describe('AppLink', () => {
   it('renders a single anchor pointing at href', () => {

@@ -1,4 +1,4 @@
-import type { Path } from './compute-diff.ts';
+import type { Path } from './compute-diff';
 
 export function formatPath(path: Path): string {
   if (path.length === 0) return '(root)';

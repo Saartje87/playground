@@ -1,9 +1,9 @@
 import { Grid, GridItem, Heading, Stack, Text } from '@blockle/blocks';
 import type { FC } from 'react';
 
-import { AppLink } from '../components/app-link/app-link.tsx';
-import { projects } from '../config/projects.ts';
-import * as styles from './page.css.ts';
+import { AppLink } from '../components/app-link/app-link';
+import { projects } from '../config/projects';
+import * as styles from './page.css';
 
 const HomePage: FC = () => {
   return (

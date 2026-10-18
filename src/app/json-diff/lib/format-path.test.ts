@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { formatPath } from './format-path.ts';
+import { formatPath } from './format-path';
 
 describe('formatPath', () => {
   it('names the root', () => {

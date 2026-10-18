@@ -3,8 +3,8 @@
 import { usePathname } from 'next/navigation';
 import type { FC } from 'react';
 
-import { AppLink } from '../app-link/app-link.tsx';
-import * as styles from './site-nav.css.ts';
+import { AppLink } from '../app-link/app-link';
+import * as styles from './site-nav.css';
 
 export const SiteNav: FC = () => {
   const pathname = usePathname();

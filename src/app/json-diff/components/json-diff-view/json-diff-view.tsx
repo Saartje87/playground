@@ -7,10 +7,10 @@ import {
   type Change,
   computeDiff,
   type JsonValue,
-} from '../../lib/compute-diff.ts';
-import { formatPath } from '../../lib/format-path.ts';
-import { ChangeRow } from '../change-row/change-row.tsx';
-import * as styles from './json-diff-view.css.ts';
+} from '../../lib/compute-diff';
+import { formatPath } from '../../lib/format-path';
+import { ChangeRow } from '../change-row/change-row';
+import * as styles from './json-diff-view.css';
 
 const SAMPLE_BEFORE = `{
   "name": "barry",

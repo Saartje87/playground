@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { computeDiff } from './compute-diff.ts';
+import { computeDiff } from './compute-diff';
 
 describe('computeDiff', () => {
   it('returns [] for equal values', () => {

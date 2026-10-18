@@ -2,8 +2,8 @@ import { screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it } from 'vitest';
 
-import { renderWithTheme } from '../../../../test/render.tsx';
-import { JsonDiffView } from './json-diff-view.tsx';
+import { renderWithTheme } from '../../../../test/render';
+import { JsonDiffView } from './json-diff-view';
 
 describe('JsonDiffView', () => {
   it('shows the diff of the sample inputs', () => {

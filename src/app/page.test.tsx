@@ -1,9 +1,9 @@
 import { screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 
-import { projects } from '../config/projects.ts';
-import { renderWithTheme } from '../test/render.tsx';
-import HomePage from './page.tsx';
+import { projects } from '../config/projects';
+import { renderWithTheme } from '../test/render';
+import HomePage from './page';
 
 describe('HomePage', () => {
   it('links to every registered project', () => {
