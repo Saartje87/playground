@@ -12,7 +12,7 @@ properties) live in [AGENTS.md](../../AGENTS.md).
 | Component | Atoms |
 | --- | --- |
 | `Box`, `Flex` | All atoms |
-| `Text`, `Heading` | Text atoms (`color`, `fontFamily`, `fontSize`, `fontStyle`, `fontWeight`, `lineHeight`, `textAlign`, `textDecoration`, `textTransform`, `textWrap`, `whiteSpace`, `wordBreak`, `wordWrap`) plus margin and padding |
+| `Text`, `Heading` | Text atoms (`color`, `fontFamily`, `fontSize`, `fontStyle`, `fontWeight`, `letterSpacing`, `lineHeight`, `textAlign`, `textDecoration`, `textTransform`, `textWrap`, `whiteSpace`, `wordBreak`, `wordWrap`) plus margin and padding |
 | `Stack`, `Inline` | All atoms except `flexDirection` (`gap` is required) |
 | `Grid` | All atoms except `flexDirection` (`display` can be overridden) |
 | `Label` | `cursor` only |
@@ -56,7 +56,8 @@ values; match them if you write your own media queries.
 | Flex | `flex`, `flexGrow`, `flexShrink` | `flex`: `1`; `flexGrow` and `flexShrink`: `0` or `1` |
 | Alignment | `alignItems`, `alignSelf`, `alignContent`, `placeItems` | `stretch`, `center`, `flex-start`, `flex-end`, `baseline` |
 | Alignment | `justifyContent` | `flex-start`, `flex-end`, `center`, `space-between`, `space-around` |
-| Typography | `fontSize` | `xsmall`, `small`, `medium`, `large`, `xlarge` |
+| Typography | `fontSize` | `xsmall`, `small`, `medium`, `large`, `xlarge`, `display` (fluid, for hero titles) |
+| Typography | `letterSpacing` | `tight`, `normal`, `wide`, `wider` |
 | Position | `position` | `relative`, `fixed`, `absolute`, `sticky`, `static` |
 
 ## Static atoms
@@ -76,7 +77,7 @@ These take a single value; they are not responsive.
 | Inset | `insetBlock`, `insetBlockStart`, `insetBlockEnd`, `insetInline`, `insetInlineStart`, `insetInlineEnd` | `0` |
 | Typography | `fontFamily` | `body`, `heading`, `mono` |
 | Typography | `fontWeight` | `light`, `normal`, `medium`, `strong`, `bold` |
-| Typography | `lineHeight` | `xsmall`, `small`, `medium`, `large`, `xlarge` |
+| Typography | `lineHeight` | `xsmall`, `small`, `medium`, `large`, `xlarge`, `display` |
 | Typography | `fontStyle` | `normal`, `italic`, `oblique` |
 | Typography | `textAlign` | `center`, `left`, `right`, `justify` |
 | Typography | `textDecoration` | `overline`, `line-through`, `underline`, `none` |
@@ -106,7 +107,8 @@ vanilla-extract styles:
 | `vars.borderWidth` | `thin`, `thick` |
 | `vars.shadow` | `1`-`5` |
 | `vars.fontFamily` | `body`, `heading`, `mono` |
-| `vars.fontSize`, `vars.lineHeight` | `xsmall`, `small`, `medium`, `large`, `xlarge` |
+| `vars.fontSize`, `vars.lineHeight` | `xsmall`, `small`, `medium`, `large`, `xlarge`, `display` |
+| `vars.letterSpacing` | `tight`, `normal`, `wide`, `wider` |
 | `vars.fontWeight` | `light`, `normal`, `medium`, `strong`, `bold` |
 | `vars.transition` | `slow`, `normal`, `fast` |
 | `vars.focus.boxShadow` | the theme's focus ring |

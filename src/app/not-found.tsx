@@ -20,18 +20,20 @@ const NotFound: FC = () => {
         <Stack className={styles.content} gap={5} marginInline="auto">
           <header>
             <Text
-              className={styles.eyebrow}
               color="primary-600"
               fontFamily="mono"
               fontSize="xsmall"
               fontWeight="bold"
+              letterSpacing="wider"
             >
               ERROR 404
             </Text>
             <Heading
-              className={styles.title}
               color="text-800"
+              fontSize="display"
+              letterSpacing="tight"
               level={1}
+              lineHeight="display"
               marginBlock={2}
             >
               Page not found

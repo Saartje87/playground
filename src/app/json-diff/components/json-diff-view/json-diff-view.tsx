@@ -82,18 +82,20 @@ export const JsonDiffView: FC = () => {
           <Box asChild paddingBlockStart={4} paddingBlockEnd={3}>
             <header>
               <Text
-                className={styles.eyebrow}
                 color="primary-600"
                 fontFamily="mono"
                 fontSize="xsmall"
                 fontWeight="bold"
+                letterSpacing="wider"
               >
                 JSON WORKSPACE
               </Text>
               <Heading
-                className={styles.title}
                 color="text-800"
+                fontSize="display"
+                letterSpacing="tight"
                 level={1}
+                lineHeight="display"
                 marginBlock={2}
               >
                 JSON Diff
@@ -202,11 +204,11 @@ export const JsonDiffView: FC = () => {
               >
                 <div>
                   <Text
-                    className={styles.eyebrow}
                     color="primary-300"
                     fontFamily="mono"
                     fontSize="xsmall"
                     fontWeight="bold"
+                    letterSpacing="wider"
                   >
                     LIVE RESULTS
                   </Text>

@@ -91,11 +91,11 @@ export const RouteDiff: FC = () => {
       <section aria-labelledby="route-diff-heading">
         <div>
           <Text
-            className={styles.eyebrow}
             color="primary-300"
             fontFamily="mono"
             fontSize="xsmall"
             fontWeight="bold"
+            letterSpacing="wider"
           >
             ROUTE DIFF
           </Text>

@@ -1,10 +1,6 @@
 import { vars } from '@blockle/blocks';
 import { style } from '@vanilla-extract/css';
 
-export const eyebrow = style({
-  letterSpacing: '0.12em',
-});
-
 export const list = style({
   listStyle: 'none',
 });
